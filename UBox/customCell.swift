@@ -8,10 +8,20 @@
 
 import UIKit
 
-class customCell: UITableViewCell {
-
+class customCell: UITableViewCell, UIScrollViewDelegate {
+    
     @IBOutlet weak var dish: UILabel!
-    @IBOutlet weak var cellIMG: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var pageControll: UIPageControl!
+}
 
+private typealias ScrollView = customCell
+
+extension ScrollView{
+    func scrollViewDidScroll (_ scrollView: UIScrollView) {
+        let pageWidth:CGFloat = scrollView.frame.width
+        let currentPage:CGFloat = floor((scrollView.contentOffset.x-pageWidth/2)/pageWidth)+1
+        self.pageControll.currentPage = Int(currentPage)
+    }
 }
 
